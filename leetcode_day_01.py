@@ -30,9 +30,12 @@ def two_sum(nums: list[int], target: int):
         # if diff is not in seen then add the current element(num)
         seen[num] = index
 
+    # if not find the target
+    return []
+
 
 print(two_sum([2, 7, 11, 15], 9))
-print(two_sum([3, 2, 4], 6))
+print(two_sum([3, 2, 4], 5))
 
 
 """
@@ -93,7 +96,27 @@ Output: false
 """
 
 
-# Code here
+def contains_duplicates(nums: list[int]):
+    # store unique elements
+    elements = set()
+
+    # iterate to the array
+    for num in nums:
+        # if current number not present inside elements set then add that element to the elements(set)
+        if num not in elements:
+            elements.add(num)
+
+        # else current element/number already present inside elements(set), Then return True
+        else:
+            return True
+    # if all numbers in array are distinct then return False
+    return False
+
+
+print(contains_duplicates([1, 2, 3, 1]))
+print(contains_duplicates([1, 2, 3, 4]))
+
+
 """
 4. Product of Array Except Self (LeetCode 238)
 Problem Statement:
@@ -109,7 +132,47 @@ Output: [0,0,9,0,0]
 """
 
 
-# Code here
+def product_except_itself(nums: list[int]):
+    """
+    ----- Brute Force -----
+    # result = []
+
+    # for i in range(len(nums)):
+    #     product = 1
+    #     for j in range(len(nums)):
+    #         if i != j:
+    #             product *= nums[j]
+    #     result.append(product)
+
+    # return result
+    """
+
+    # Optimal version
+    n = len(nums)
+
+    # create a result array filled with 1s
+    result = [1] * n
+
+    # left side products
+    for i in range(1, n):
+        result[i] = result[i - 1] * nums[i - 1]
+
+    # Multiply RIGHT side products
+    suffix = 1  # nothing on the right yet
+
+    for i in range(n - 1, -1, -1):
+        # multiply current result (left product) with suffix (right product)
+        result[i] *= suffix
+
+        # update suffix by multiplying current number
+        suffix *= nums[i]
+    return result
+
+
+print(product_except_itself([1, 2, 3, 4]))
+print(product_except_itself([-1, 1, 0, -3, 3]))
+
+
 """
 5. Maximum Subarray (LeetCode 53) – “Maximum Sum array”
 Problem Statement:
@@ -124,7 +187,19 @@ Output: 1
 """
 
 
-# Code here
+def max_subarray(nums: list[int]):
+    current_sum = nums[0]
+    max_sum = nums[0]
+
+    for num in nums:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(current_sum, max_sum)
+    return max_sum
+
+
+print(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+print(max_subarray([4, -1, 2, 1]))
+
 """
 6. Longest Substring Without Repeating Characters (LeetCode 3)
 Problem Statement:
