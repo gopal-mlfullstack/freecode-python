@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI TaskFlow
 
-## Getting Started
+A full-stack intelligent task management application built with Next.js, FastAPI, and Supabase — featuring AI-powered productivity assistance via Groq LLM.
 
-First, run the development server:
+## Live Demo
+[ai-taskflow.vercel.app](https://your-vercel-link-here) · [API Docs](https://your-render-link-here/docs)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+- Secure authentication with session management (Supabase Auth)
+- Full task management — create, edit, delete, filter by priority and status
+- Dashboard with live task statistics
+- AI Smart Suggest — analyze any task to get priority recommendations, rewritten descriptions, or actionable subtasks
+- Per-user data isolation enforced at the database level (Row Level Security)
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 14 (App Router), TypeScript, Tailwind CSS |
+| Backend | FastAPI (Python), Pydantic |
+| Database & Auth | Supabase (PostgreSQL + Auth) |
+| AI | Groq API — llama-3.3-70b-versatile |
+| Deployment | Vercel (frontend), Render (backend) |
+
+## Architecture
+```
+Next.js (Vercel) → FastAPI (Render) → Supabase (PostgreSQL)
+                                  ↘ Groq API (AI)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Related Repositories
+- Frontend: [github.com/you/ai-taskflow-frontend](https://github.com)
+- Backend: [github.com/you/ai-taskflow-backend](https://github.com)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Local Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Backend**
+```bash
+cd backend
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
-## Learn More
+**Frontend**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Backend `.env`**
+```
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+GROQ_API_KEY=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Frontend `.env.local`**
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_API_URL=
+```
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Deployment Order (Follow Exactly)
+```
+1. Push both repos to GitHub
+2. Deploy backend on Render → get Render URL
+3. Update NEXT_PUBLIC_API_URL in Vercel with Render URL
+4. Deploy frontend on Vercel → get Vercel URL
+5. Update CORS in main.py with Vercel URL → push → Render redeploys
+6. Update Supabase redirect URLs with Vercel URL
+7. Test the live app end to end
