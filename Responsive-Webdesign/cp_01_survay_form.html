@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Survey Form</title>
+  </head>
+
+  <body>
+    <h1 id="title">Free Code Camp Survay Form</h1>
+    <p id="description">Thank you for taking the time to help us improve the platform</p>
+    <form id="survey-form">
+      <label id="name-label" for="name" 
+      >Name</label>
+      <input id="name" type="text" placeholder="Enter ypur name" required>
+      <br>
+      <label id="email-label"  for="email"  >Email</label>
+      <input  placeholder="Enter your email" id="email" type="email" required >
+      <br>
+      <label id="number-label" for="number" >Age (optional)</label>
+      <input id="number" type="number" min="1" max="10" placeholder="Age" >
+    <p>Which option best describes your current role?</p>
+    <select id="dropdown" >
+      <option value="current level" selected>Select Current Level</option>
+      <option value="beginner" >Beginner</option>
+      <option value="intermidiate" >Intermidiate</option>
+      <option value="adavnce" >Advance</option>
+    </select>
+    <p>Would you recommend freeCodeCamp to a friend?</p> 
+        
+      <label id="radio">
+        <input type="radio" name="answer" value="definitely" />
+        Definitely
+      </label>
+      <label id="radio">
+        <input type="radio" name="answer"  value="maybe" />
+        Maybe
+      </label>
+      <label id="radio">
+        <input type="radio" name="answer" value="not-sure" />
+        Not sure
+      </label>
+
+      <p>What is your favorite feature of freeCodeCamp?</p>
+      <select id="dropdown" >
+        <option value="opensource" >Opensource</option>
+        <option value="favorite feature" selected >Favorite Feature</option>
+        <option value="community" >Community</option>
+        <option value="challenges" >Challenges</option>
+      </select>
+      <p>What do you like to see to improve?(check all that apply)</p>
+      <label for="frontend-projects">Frontend Projects</>
+      <input id="frontend-projects" type="checkbox"  value="frontend-projects">
+      <label for="backend-projects">Backend Projects</>
+      <input id="backend-projects" type="checkbox" value="backend-projects" >
+      <label for="data-visualization">Data Visualization</>
+      <input id="data-visualization" type="checkbox" value="data-visualization" >
+      <label for="challenges">Challenges</>
+      <input id="challenges" type="checkbox" value="challenges" >
+      <label for="opensource-community">Opensource Community</>
+      <input id="opensource-community" type="checkbox" value="opensource-community" >
+      <label for="videos">Videos</>
+      <input id="videos" type="checkbox" value="videos" >
+      <label for="interview-preparation">Interview Preparation</>
+      <input id="interview-preparation" type="checkbox" value="interview-preparation" >
+      <br>      
+      <br>
+      <label for="comments-suggestions">Any comments and Suggestions?</label>
+
+      <textarea id="comments-suggestions" name="comments-suggestions" rows="4" cols="40" placeholder="Enter your comments here...">
+
+      </textarea>
+      <button id="submit" type="submit" >Submit</button>
+
+
+    </form>
+  </body>
+</html>
